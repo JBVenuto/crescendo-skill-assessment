@@ -1,22 +1,33 @@
-import React, { Component } from 'react';
+import React from 'react';
+import Card from '../components/Card';
 
-class Detail extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            
-        }
-    }
+const List = (props) => {
+    
 
-    componentDidMount = () => {
-        
-    }
-
-    render() {
+    let list = props.recipes.map(recipe => {
+        let src = "http://localhost:3001/" + recipe.images.small
         return (
-            <h1>Hello World</h1>
+            // <div className="card" style={divStyle}>
+            //     <img className="card-img-top" src={src} alt={recipe.title}></img>
+            //     <div className="card-body">
+            //         <h5>{recipe.title}</h5>
+            //         <p>{recipe.description}</p>
+            //     </div>
+            // </div>
+            <Card 
+                key={recipe.uuid}
+                imgsrc={src}
+                title={recipe.title}
+                description={recipe.description}
+            />
         )
-    }
+    })
+    
+    console.log("props:", props.recipes)
+    return (
+        <div>{list}</div>
+    )
 }
 
-export default Detail;
+
+export default List;

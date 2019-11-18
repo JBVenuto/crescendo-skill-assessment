@@ -1,17 +1,49 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import axios from 'axios';
 import Detail from './views/Detail';
 import List from './views/List';
 
-function App() {
+class App extends Component {
+  constructor(props) {
+      super(props)
+      this.state = {
+          recipes: [],
+          specials:[]
+      }
+  }
+
+  componentDidMount = () => {
+      this.getList();
+  }
+
+  getList = () => {
+      axios
+      .get('http://localhost:3001/recipes')
+      .then(res => {
+        this.setState({
+          recipes: res.data
+        })
+      })
+      .then(() => console.log("recipes state:", this.state.recipes))
+  }
+
+  render(){
   return (
     <Router>
       <Switch>
-        <Route path="/:id" children={<Detail />} />
-        <Route path="/"><List /></Route>
+        <Route 
+        path="/:id" 
+        children={<Detail 
+          recipes={this.state.recipes}
+        />} />
+        <Route path="/">
+          <List recipes={this.state.recipes}/>
+        </Route>
       </Switch>
     </Router>
   )
+  }
 }
 
 export default App;
