@@ -6,29 +6,30 @@ import List from './views/List';
 
 class App extends Component {
   constructor(props) {
-      super(props)
-      this.state = {
-          recipes: [],
-          specials:[]
-      }
+    super(props)
+    this.state = {
+      recipes: [],
+      specials: []
+    }
   }
 
   componentDidMount = () => {
-      this.getList();
-      this.getSpecials();
+    this.getList();
+    this.getSpecials();
   }
 
+  // Get the recipes from the api and store it in the state
   getList = () => {
-      axios
+    axios
       .get('http://localhost:3001/recipes')
       .then(res => {
         this.setState({
           recipes: res.data
         })
       })
-      .then(() => console.log("recipes state:", this.state.recipes))
   }
 
+  // Get the specials from the api and store it in the state
   getSpecials = () => {
     axios
       .get('http://localhost:3001/specials')
@@ -37,25 +38,24 @@ class App extends Component {
           specials: res.data
         })
       })
-      .then(() => console.log("specials state:", this.state.specials))
   }
 
-  render(){
-  return (
-    <Router>
-      <Switch>
-        <Route 
-        path="/:id" 
-        children={<Detail 
-          recipes={this.state.recipes}
-          specials={this.state.specials}
-        />} />
-        <Route path="/">
-          <List recipes={this.state.recipes}/>
-        </Route>
-      </Switch>
-    </Router>
-  )
+  render() {
+    return (
+      <Router>
+        <Switch>
+          <Route
+            path="/:id"
+            children={<Detail
+              recipes={this.state.recipes}
+              specials={this.state.specials}
+            />} />
+          <Route path="/">
+            <List recipes={this.state.recipes} />
+          </Route>
+        </Switch>
+      </Router>
+    )
   }
 }
 

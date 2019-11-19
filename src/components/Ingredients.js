@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Ingredients = props => {
+    // Style properties
     const sale = {
         border: "1px dashed black",
         backgroundColor: "#edeaea",
