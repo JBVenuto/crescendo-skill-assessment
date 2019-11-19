@@ -13,18 +13,18 @@ const Detail = props => {
     // if (details) {
     //     console.log("detail component:", details);
     // }
-    // if(props.specials){console.log("specials:", props.specials)}
+    if(props.specials){console.log("specials:", props.specials)}
 
 
-    if (details) {
+    if (details && props.specials) {
         return (
             <div>
                 <Hero src={details.images.full} title={details.title} description={details.description} />
                 <div className="container">
                     <div className="row">
-                        <div className="col-4">Prep time: {details.prepTime}</div>
-                        <div className="col-4">Cook time: {details.cookTime}</div>
-                        <div className="col-4">total time: {details.prepTime + details.cookTime}</div>
+                        <div className="col-4 text-center">Prep time: {details.prepTime}</div>
+                        <div className="col-4 text-center">Cook time: {details.cookTime}</div>
+                        <div className="col-4 text-center">total time: {details.prepTime + details.cookTime}</div>
                     </div>
                     <hr></hr>
 

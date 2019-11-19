@@ -1,10 +1,10 @@
 import React from 'react';
 
 const Hero = props => {
-    let src = "http://localhost:3001/" + props.src
+    const src = "http://localhost:3001/" + props.src
     const jumbo = {
-        "background-image": "url(" + src + ")",
-        "background-size": "cover"
+        "backgroundImage": "url(" + src + ")",
+        "backgroundSize": "cover"
     }
 
     return (

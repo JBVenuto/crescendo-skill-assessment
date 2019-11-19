@@ -2,7 +2,7 @@ import React from 'react';
 import Card from '../components/Card';
 
 const List = props => {
-    
+    // Go through the recipies to send props down to the card component
     let list = props.recipes.map((recipe, index) => {
         let src = "http://localhost:3001/" + recipe.images.small;
         let href = "http://localhost:3000/" + index;
