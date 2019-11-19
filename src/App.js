@@ -28,6 +28,17 @@ class App extends Component {
       .then(() => console.log("recipes state:", this.state.recipes))
   }
 
+  getSpecials = () => {
+    axios
+      .get('http://localhost:3001/specials')
+      .then(res => {
+        this.setState({
+          specials: res.data
+        })
+      })
+      .then(() => console.log("specials state:", this.state.specials))
+  }
+
   render(){
   return (
     <Router>
@@ -36,6 +47,7 @@ class App extends Component {
         path="/:id" 
         children={<Detail 
           recipes={this.state.recipes}
+          specials={this.state.specials}
         />} />
         <Route path="/">
           <List recipes={this.state.recipes}/>

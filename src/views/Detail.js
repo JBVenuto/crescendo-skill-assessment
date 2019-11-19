@@ -4,14 +4,27 @@ import { useParams } from 'react-router-dom';
 const Detail = (props) => {
 
     let { id } = useParams();
-    console.log(id)
+    let details = props.recipes[id];
+    // if (details){
+    // console.log("detail component:", details.uuid);
+    // }
 
+    
+    if(details) {
     return (
-        <div>
-        <h1>Selected food:</h1>
-        <h2>{props.info[id]}</h2>
+        <div className="container">
+            <h1>
+                {details.title}
+            </h1>
+            <h3>
+                {details.description}
+            </h3>
+            
         </div>
     )
+    }
+    else {return <div> </div>}
+    
 }
 
 
