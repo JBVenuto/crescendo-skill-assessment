@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from '../components/Card';
 
-const List = (props) => {
+const List = props => {
     
     let list = props.recipes.map((recipe, index) => {
         let src = "http://localhost:3001/" + recipe.images.small;
