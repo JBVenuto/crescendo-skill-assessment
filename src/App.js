@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
+import Add from './views/Add';
 import Detail from './views/Detail';
 import List from './views/List';
 
@@ -20,8 +21,7 @@ class App extends Component {
 
   // Get the recipes from the api and store it in the state
   getList = () => {
-    axios
-      .get('http://localhost:3001/recipes')
+    axios.get('http://localhost:3001/recipes')
       .then(res => {
         this.setState({
           recipes: res.data
@@ -31,8 +31,7 @@ class App extends Component {
 
   // Get the specials from the api and store it in the state
   getSpecials = () => {
-    axios
-      .get('http://localhost:3001/specials')
+    axios.get('http://localhost:3001/specials')
       .then(res => {
         this.setState({
           specials: res.data
@@ -44,12 +43,14 @@ class App extends Component {
     return (
       <Router>
         <Switch>
+        <Route path="/add"><Add /></Route>
           <Route
             path="/:id"
             children={<Detail
               recipes={this.state.recipes}
               specials={this.state.specials}
             />} />
+            
           <Route path="/">
             <List recipes={this.state.recipes} />
           </Route>
