@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 // import uuidv4 from 'uuid/v4';
+import DirForm from '../components/DirForm';
+import IngForm from '../components/IngForm';
 import Input from '../components/Input';
 
 class Add extends Component {
@@ -9,62 +11,31 @@ class Add extends Component {
         this.state = {
             numIngs: 1,
             numDirs: 1,
-            // test: {
-            //     name: String,
-            //     age: Number
-            // },
-            // recipe: {
-            //     uuid: String,
-            //     title: String,
-            //     description: String,
-            //     images: {
-            //         "full": "/img/default.jpg", 
-            //         "medium": "/img/default--m.jpg"       
-            //     },
-            //     servings: Number,
-            //     prepTime: Number,
-            //     cookTime: Number,
-            //     postDate: Date,
-            //     editDate: Date,
-            //     ingredients: [{
-            //         uuid: String,
-            //         amount: Number,
-            //         measurement: String,
-            //         name: String
-            //     }],
-            //     directions: [{
-            //         instructions: String,
-            //         optional: Boolean
-            //     }]
-            // }
+
             recipe: {
-                uuid: "1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed",
-                title: "Test Title",
-                description: "Test description",
+                uuid: String,
+                title: String,
+                description: String,
                 images: {
                     "full": "/img/default.jpg",
                     "medium": "/img/default--m.jpg"
                 },
-                servings: 4,
-                prepTime: 10,
-                cookTime: 10,
-                postDate: "11/19/2019 05:32:33 PM",
-                editDate: "11/19/2019 05:32:33 PM",
+                servings: Number,
+                prepTime: Number,
+                cookTime: Number,
+                postDate: Date,
+                editDate: Date,
                 ingredients: [{
-                    uuid: "1b9d9bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed",
-                    amount: "3",
-                    measurement: "cups",
-                    name: "test ingredient"
+                    uuid: String,
+                    amount: Number,
+                    measurement: String,
+                    name: String
                 }],
                 directions: [{
-                    instructions: "Mix",
-                    optional: false
-                },
-                {
-                    instructions: "cook",
-                    optional: true
+                    instructions: String,
+                    optional: Boolean
                 }]
-            }
+            }         
         }
     }
 
@@ -75,26 +46,60 @@ class Add extends Component {
             .catch(err => console.log(err))
     }
 
-    log = () => {
-
-        console.log(this.state.test);
-    }
-
     // Update the state with user input
     handleChange = event => {
         const inputName = event.target.name;
         const inputValue = event.target.value;
-        let mod = this.state.test;
-        mod[inputName] = inputValue;
-        this.setState({ test: mod })
+        let mod = this.state.recipe;
+
+        if (inputName === "name" || inputName === "amount" || inputName === "measurement") {
+            let i = parseInt(event.target.id)
+            let newIng = mod.ingredients[i];
+            newIng[inputName] = inputValue;
+            mod.ingredients[i] = newIng;
+        }
+        else if (inputName === "directions"){
+            console.log("direction")
+        }
+        else {
+            mod[inputName] = inputValue;
+        }
+        this.setState({ recipe: mod })
+    }
+
+    numIngredients = () => {
+        let n = this.state.numIngs + 1;
+        let mod = this.state.recipe;
+        mod.ingredients.push({
+            amount: Number,
+            measurement: String,
+            name: String
+        })
+        this.setState({
+            numIngs: n,
+            recipe: mod
+        })
+    }
+
+    numDirections = () => {
+        let n = this.state.numDirs + 1;
+        let mod = this.state.recipe
+        mod.directions.push({
+            instructions: String,
+            optional: Boolean
+        })
+        this.setState({
+            numDirs: n,
+            recipe: mod
+        })
     }
 
     render() {
         return (
-            <div className="container">
+            <div className="container" >
                 <div className="mb-1">
                     <Input name="title" onChange={this.handleChange} />
-                </div> 
+                </div>
                 <div className="mb-2">
                     <Input name="description" onChange={this.handleChange} />
                 </div>
@@ -109,6 +114,16 @@ class Add extends Component {
                 </div>
                 <div className="mb-2">
                     <label>Ingredients:</label>
+                    <IngForm n={this.state.numIngs} onChange={this.handleChange} />
+                    <button className="btn btn-primary rounded-circle" onClick={this.numIngredients}>
+                        <div className="font-weight-bolder">+</div>
+                    </button>
+                </div>
+                <div className="mb-2">
+                    <DirForm n={this.state.numDirs} onChange={this.handleChange} />
+                    <button className="btn btn-primary rounded-circle" onClick={this.numDirections}>
+                        <div className="font-weight-bolder">+</div>
+                    </button>
                 </div>
 
                 <button className="btn btn-primary" onClick={this.log}>Add</button>
@@ -116,5 +131,6 @@ class Add extends Component {
         )
     }
 }
+
 
 export default Add;
