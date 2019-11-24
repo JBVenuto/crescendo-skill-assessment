@@ -6,9 +6,9 @@ const IngForm = props => {
     for (let i = 0; i < props.n; i++) {
         nInput.push(
             <div className="mb-1" key={i}>
-                <Input name="amount" num={props.n - 1} onChange={props.onChange} />
-                <Input name="measurement" num={props.n - 1} onChange={props.onChange} />
-                <Input name="name" num={props.n - 1} onChange={props.onChange} />
+                <Input name="amount" num={i} onChange={props.onChange} />
+                <Input name="measurement" num={i} onChange={props.onChange} />
+                <Input name="name" num={i} onChange={props.onChange} />
             </div>
         )
     }

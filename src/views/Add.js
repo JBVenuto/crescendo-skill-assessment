@@ -41,6 +41,7 @@ class Add extends Component {
 
     // Add a recipe to the API
     addRecipe = () => {
+        console.log("add recipe")
         axios.post('http://localhost:3001/recipes', this.state.recipe)
             .then(res => console.log(res))
             .catch(err => console.log(err))
@@ -53,13 +54,16 @@ class Add extends Component {
         let mod = this.state.recipe;
 
         if (inputName === "name" || inputName === "amount" || inputName === "measurement") {
-            let i = parseInt(event.target.id)
+            let i = parseInt(event.target.id);
             let newIng = mod.ingredients[i];
             newIng[inputName] = inputValue;
             mod.ingredients[i] = newIng;
         }
         else if (inputName === "directions"){
-            console.log("direction")
+            let i = parseInt(event.target.id);
+            let newDir = mod.directions[i];
+            newDir.instructions = inputValue;
+            mod.directions[i] = newDir;
         }
         else {
             mod[inputName] = inputValue;
@@ -126,7 +130,7 @@ class Add extends Component {
                     </button>
                 </div>
 
-                <button className="btn btn-primary" onClick={this.log}>Add</button>
+                <button className="btn btn-primary" onClick={this.addRecipe}>Add</button>
             </div>
         )
     }

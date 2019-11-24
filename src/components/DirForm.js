@@ -7,7 +7,7 @@ const DirForm = props => {
         nInput.push(
             <div className="mb-1" key={i}>
                 <label className="mr-2">{i + 1}. </label>
-                <Input name="directions" onChange={props.onChange} />
+                <Input name="directions" num={i} onChange={props.onChange} />
             </div>
         )
     }
