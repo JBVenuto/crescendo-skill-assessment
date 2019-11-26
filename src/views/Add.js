@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 // import uuidv4 from 'uuid/v4';
-import DirForm from '../components/DirForm';
-import IngForm from '../components/IngForm';
-import Input from '../components/Input';
+import FormAdd from '../components/FormAdd';
 
 class Add extends Component {
     constructor(props) {
@@ -71,6 +69,7 @@ class Add extends Component {
         this.setState({ recipe: mod })
     }
 
+    // Allow user to add more ingredients or directions
     numIngredients = () => {
         let n = this.state.numIngs + 1;
         let mod = this.state.recipe;
@@ -84,7 +83,6 @@ class Add extends Component {
             recipe: mod
         })
     }
-
     numDirections = () => {
         let n = this.state.numDirs + 1;
         let mod = this.state.recipe
@@ -101,36 +99,15 @@ class Add extends Component {
     render() {
         return (
             <div className="container" >
-                <div className="mb-1">
-                    <Input name="title" onChange={this.handleChange} />
-                </div>
-                <div className="mb-2">
-                    <Input name="description" onChange={this.handleChange} />
-                </div>
-                <div className="mb-1">
-                    <Input name="servings" onChange={this.handleChange} />
-                </div>
-                <div className="mb-1">
-                    <Input name="prepTime" onChange={this.handleChange} />
-                </div>
-                <div className="mb-2">
-                    <Input name="cookTime" onChange={this.handleChange} />
-                </div>
-                <div className="mb-2">
-                    <label>Ingredients:</label>
-                    <IngForm n={this.state.numIngs} onChange={this.handleChange} />
-                    <button className="btn btn-primary rounded-circle" onClick={this.numIngredients}>
-                        <div className="font-weight-bolder">+</div>
-                    </button>
-                </div>
-                <div className="mb-2">
-                    <DirForm n={this.state.numDirs} onChange={this.handleChange} />
-                    <button className="btn btn-primary rounded-circle" onClick={this.numDirections}>
-                        <div className="font-weight-bolder">+</div>
-                    </button>
-                </div>
-
-                <button className="btn btn-primary" onClick={this.addRecipe}>Add</button>
+                <h1>Add a new recipe</h1>
+                <FormAdd
+                    onChange={this.handleChange}
+                    numIngs={this.state.numIngs}
+                    addIng={this.numIngredients}
+                    numDirs={this.state.numDirs}
+                    addDir={this.numDirections}
+                    addRecipe={this.addRecipe}                 
+                />
             </div>
         )
     }
