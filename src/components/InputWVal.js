@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Input = props => {
+const InputWVal = props => {
 
     let num;
     if(props.num){
@@ -21,4 +21,4 @@ const Input = props => {
     )
 }
 
-export default Input;
+export default InputWVal;
