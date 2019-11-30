@@ -4,6 +4,7 @@ import axios from 'axios';
 import Add from './views/Add';
 import Detail from './views/Detail';
 import List from './views/List';
+import Edit from './components/Edit';
 
 class App extends Component {
   constructor(props) {
@@ -44,6 +45,7 @@ class App extends Component {
       <Router>
         <Switch>
         <Route path="/add"><Add /></Route>
+        <Route path="/edit"><Edit /></Route>
           <Route
             path="/:id"
             children={<Detail
