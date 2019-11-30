@@ -30,17 +30,17 @@ class Edit extends Component {
 
     // Add a recipe to the API
     editRecipe = () => {
-        console.log("add recipe")
-        // axios.post('http://localhost:3001/recipes', this.state.recipe)
-        //     .then(res => console.log(res))
-        //     .catch(err => console.log(err))
+        console.log("edit recipe")
+        axios.patch(`http://localhost:3001/recipes/${this.state.recipes[this.state.selectedRec].uuid}`, this.state.recipes[this.state.selectedRec])
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
     }
 
     // Update the state with user input
     handleChange = event => {
         const inputName = event.target.name;
         const inputValue = event.target.value;
-        let mod = this.state.recipe;
+        let mod = this.state.recipes[this.state.selectedRec];
 
         if (inputName === "name" || inputName === "amount" || inputName === "measurement") {
             let i = parseInt(event.target.id);
