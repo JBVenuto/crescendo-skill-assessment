@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-// import uuidv4 from 'uuid/v4';
+import uuidv4 from 'uuid/v4';
 import FormAdd from '../components/FormAdd';
+import Hero from '../components/Hero';
 
 class Add extends Component {
     constructor(props) {
@@ -11,7 +12,7 @@ class Add extends Component {
             numDirs: 1,
 
             recipe: {
-                uuid: String,
+                uuid: uuidv4(),
                 title: String,
                 description: String,
                 images: {
@@ -24,7 +25,7 @@ class Add extends Component {
                 postDate: Date,
                 editDate: Date,
                 ingredients: [{
-                    uuid: String,
+                    uuid: uuidv4(),
                     amount: Number,
                     measurement: String,
                     name: String
@@ -33,13 +34,14 @@ class Add extends Component {
                     instructions: String,
                     optional: Boolean
                 }]
-            }         
+            }
         }
     }
 
     // Add a recipe to the API
     addRecipe = () => {
         console.log("add recipe")
+        // Make the API call
         axios.post('http://localhost:3001/recipes', this.state.recipe)
             .then(res => console.log(res))
             .catch(err => console.log(err))
@@ -57,7 +59,7 @@ class Add extends Component {
             newIng[inputName] = inputValue;
             mod.ingredients[i] = newIng;
         }
-        else if (inputName === "directions"){
+        else if (inputName === "directions") {
             let i = parseInt(event.target.id);
             let newDir = mod.directions[i];
             newDir.instructions = inputValue;
@@ -74,6 +76,7 @@ class Add extends Component {
         let n = this.state.numIngs + 1;
         let mod = this.state.recipe;
         mod.ingredients.push({
+            uuid: uuidv4(),
             amount: Number,
             measurement: String,
             name: String
@@ -98,16 +101,19 @@ class Add extends Component {
 
     render() {
         return (
-            <div className="container" >
-                <h1>Add a new recipe</h1>
-                <FormAdd
-                    onChange={this.handleChange}
-                    numIngs={this.state.numIngs}
-                    addIng={this.numIngredients}
-                    numDirs={this.state.numDirs}
-                    addDir={this.numDirections}
-                    addRecipe={this.addRecipe}                 
-                />
+            <div>
+                <Hero src="/img/default.jpg" title="Add a Recipe" description="Add your favorite recipe to our collection" />
+                <div className="container" >
+                    <h1>Add a new recipe</h1>
+                    <FormAdd
+                        onChange={this.handleChange}
+                        numIngs={this.state.numIngs}
+                        addIng={this.numIngredients}
+                        numDirs={this.state.numDirs}
+                        addDir={this.numDirections}
+                        addRecipe={this.addRecipe}
+                    />
+                </div>
             </div>
         )
     }

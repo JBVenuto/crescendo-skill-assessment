@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Hero from '../components/Hero';
 import FormEdit from '../components/FormEdit';
 import Option from '../components/Option';
 
@@ -109,6 +110,8 @@ class Edit extends Component {
 
     render() {
         return (
+            <div>
+                <Hero src="/img/default.jpg" title="Edit a Recipe" description="Edit a recipe to make it more to your liking" />
             <div className="container" >
                 <h1>Edit a recipe</h1>
                 {/* <label>Select a recipe: </label> */}
@@ -127,6 +130,7 @@ class Edit extends Component {
                     editRecipe={this.editRecipe}
                     selected={this.state.recipes[this.state.selectedRec]}
                 />
+            </div>
             </div>
         )
     }
