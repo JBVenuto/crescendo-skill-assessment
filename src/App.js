@@ -4,7 +4,7 @@ import axios from 'axios';
 import Add from './views/Add';
 import Detail from './views/Detail';
 import List from './views/List';
-import Edit from './components/Edit';
+import Edit from './views/Edit';
 
 class App extends Component {
   constructor(props) {

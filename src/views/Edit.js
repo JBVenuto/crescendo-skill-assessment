@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-// import uuidv4 from 'uuid/v4';
 import FormEdit from '../components/FormEdit';
 import Option from '../components/Option';
 
@@ -31,6 +30,15 @@ class Edit extends Component {
     // Add a recipe to the API
     editRecipe = () => {
         console.log("edit recipe")
+        // Update the edit date in the state
+        let t = new Date();
+        let parseT =  (t.getMonth() + 1) + "/" + t.getDate() + "/" + t.getFullYear() + " " + t.getHours() + ":" + t.getMinutes() + ":" + t.getSeconds();
+        console.log(parseT);
+        let mod = this.state.recipes;
+        mod[this.state.selectedRec].editDate = parseT;
+        this.setState({ recipes: mod });
+
+        // Make the API call
         axios.patch(`http://localhost:3001/recipes/${this.state.recipes[this.state.selectedRec].uuid}`, this.state.recipes[this.state.selectedRec])
             .then(res => console.log(res))
             .catch(err => console.log(err))
