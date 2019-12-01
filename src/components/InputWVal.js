@@ -10,6 +10,7 @@ const InputWVal = props => {
 
     return (
         <input 
+            className={props.className}
             type="text" 
             name={props.name}
             aria-label={props.name} 
